@@ -1,0 +1,19 @@
+[
+    {
+        "title": "Ink",
+        "price": "123"
+    },
+    {
+        "title": "Qtum",
+        "price": "234.21"
+    },
+    {
+        "title": "IP token",
+        "children": [
+            {
+                "title": "IP token",
+                "price": "314.21"
+            }
+        ]
+    }
+]
