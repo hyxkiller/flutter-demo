@@ -1,4 +1,4 @@
-# demo1
+# flutter-demo
 
 A new Flutter project.
 

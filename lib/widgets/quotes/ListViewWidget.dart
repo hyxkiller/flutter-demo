@@ -8,7 +8,9 @@ class ListViewWidget extends StatefulWidget {
   }
 }
 
-class ListViewWidgetState extends State<ListViewWidget>with AutomaticKeepAliveClientMixin {
+// AutomaticKeepAliveClientMixin保持组件状态
+class ListViewWidgetState extends State<ListViewWidget>
+    with AutomaticKeepAliveClientMixin {
   final _color = TextStyle(color: Color.fromARGB(255, 173, 183, 194));
 
   Widget listItemBuilder(BuildContext context, int index) {
@@ -84,15 +86,71 @@ class ListViewWidgetState extends State<ListViewWidget>with AutomaticKeepAliveCl
     );
   }
 
+  Future<Null> _onRefresh() async {
+    // 用Future模拟异步
+    await Future.delayed(Duration(seconds: 3), () {
+      debugPrint('下拉刷新');
+    });
+  }
+
+  ScrollController _scrollController = ScrollController();
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: lists.length,
-        itemBuilder: listItemBuilder,
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getMoreWidget();
+        Future.delayed(Duration(seconds: 1), () {
+          debugPrint('上拉加载');
+        });
+      }
+    });
+  }
+
+  Widget _getMoreWidget() {
+    debugPrint('bottom');
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '加载中...     ',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            CircularProgressIndicator(
+              strokeWidth: 1.0,
+            )
+          ],
+        ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: ListView.builder(
+          itemCount: lists.length,
+          itemBuilder: listItemBuilder,
+          controller: _scrollController,
+          physics: AlwaysScrollableScrollPhysics(),
+        ),
+      ),
+    );
+  }
+
   @override
   bool get wantKeepAlive => true;
 }
