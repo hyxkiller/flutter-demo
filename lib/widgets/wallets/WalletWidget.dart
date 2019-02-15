@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'dart:io';
 import 'dart:convert';
+import 'package:demo1/redux/store.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:http/http.dart' as http;
+import 'package:demo1/locales/localization_src.dart';
 
 class WalletWidget extends StatefulWidget {
   // final String title, price;
@@ -35,7 +38,7 @@ class _WalletWidgetState extends State<WalletWidget> {
   @override
   void initState() {
     super.initState();
-    _getData();
+    // _getData();
   }
 
   _getData() async {
@@ -50,15 +53,26 @@ class _WalletWidgetState extends State<WalletWidget> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    return Container(
-        child: Row(
-      children: <Widget>[
-        Container(
-          child: Text('$newTitle'),
-          width: 200,
-        ),
-      ],
-    ));
+    return StoreConnector<HYXState, Locale>(
+      converter: (store) => store.state.locale,
+      builder: (context, locale){
+        return Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Text('222222'),
+              // child: Text('$newTitle'),
+              width: 200,
+            ),
+            Container(
+              child: Text(DemoLocalizations.of(context).currentLocalized.haha),
+              // child: Text('$newTitle'),
+              width: 200,
+            ),
+          ],
+        ));
+      },
+    );
   }
 
   @override

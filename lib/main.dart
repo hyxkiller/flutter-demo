@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
-// import 'translations.dart';
+// import 'package:demo1/locales/localizationDelegate.dart';
 import 'widgets/splash/SplashWIdget.dart';
 import 'Home.dart';
 import 'package:flutter_redux/flutter_redux.dart';

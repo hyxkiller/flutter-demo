@@ -26,7 +26,7 @@ final List<Exchange> lists = [
     percent: '- 0.38%'
   ),
   Exchange(
-    baseCoin: 'STEEM',
+    baseCoin: 'STEM',
     quoteCoin: 'USDT',
     imgUrl: 'http://ink-assets-public.oss-cn-beijing.aliyuncs.com/site/a8701eb979a5482b939ffa3c211cd0fe.jpg',
     tradingVolume: '31.20',
