@@ -10,6 +10,7 @@ import 'widgets/LocalizationsWidget.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:demo1/redux/store.dart';
+import 'package:demo1/widgets/mine/index.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -25,11 +26,16 @@ class _HomeState extends State<Home> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final List _body = [
     QuotesIndexWidget(),
     ExchangeWidget(),
-    UsdtWidget(),
     WalletWidget(),
+    MineWidget(),
   ];
 
   final store = Store<HYXState>(appReducer,

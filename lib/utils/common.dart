@@ -5,6 +5,10 @@ import 'package:demo1/redux/actions.dart';
 import 'package:demo1/widgets/common/FlexButton.dart';
 
 class CommonUtils {
+  // 刘海控制
+  static topPadding(context) {
+    return EdgeInsets.only(top: MediaQuery.of(context).padding.top)
+  }
   // 改变语言
   static changeLocale(Store<HYXState> store, int index) {
     Locale locale = store.state.locale;

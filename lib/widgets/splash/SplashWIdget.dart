@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'skip_down_time.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashWidget extends StatefulWidget {
   @override
@@ -8,16 +9,16 @@ class SplashWidget extends StatefulWidget {
 
 class _SplashWidgetState extends State<SplashWidget> {
   bool _isToHome = false;
-  int second = 5;
+  int _count = 5;
 
   @override
   void initState() {
     super.initState();
     _delayToHomePage();
-    // _countDown();
+    // _doCountDown();
   }
 
-  // void _countDown() {
+  // void _doCountDown() {
   //   Timer(Duration(seconds: 1), () {
   //     debugPrint('111');
   //   });
@@ -26,7 +27,7 @@ class _SplashWidgetState extends State<SplashWidget> {
 
   void _toHome() {
     _isToHome = true;
-    Navigator.pushNamed(context, 'home');
+    Navigator.of(context).pushReplacementNamed('/home');
   }
 
   _delayToHomePage() {
@@ -39,6 +40,25 @@ class _SplashWidgetState extends State<SplashWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance =
+        ScreenUtil(width: 750, height: 1334, allowFontScaling: true)
+          ..init(context);
+    print('设备宽度:${ScreenUtil.screenWidth}'); //Device width
+    print('设备高度:${ScreenUtil.screenHeight}'); //Device height
+    print('设备的像素密度:${ScreenUtil.pixelRatio}'); //Device pixel density
+    print(
+        '底部安全区距离:${ScreenUtil.bottomBarHeight}'); //Bottom safe zone distance，suitable for buttons with full screen
+    print(
+        '状态栏高度:${ScreenUtil.statusBarHeight}px'); //Status bar height , Notch will be higher Unit px
+
+    print('实际宽度的dp与设计稿px的比例:${ScreenUtil().scaleWidth}');
+    print('实际高度的dp与设计稿px的比例:${ScreenUtil().scaleHeight}');
+
+    print(
+        '宽度和字体相对于设计稿放大的比例:${ScreenUtil().scaleWidth * ScreenUtil.pixelRatio}');
+    print('高度相对于设计稿放大的比例:${ScreenUtil().scaleHeight * ScreenUtil.pixelRatio}');
+    print('系统的字体缩放比例:${ScreenUtil.textScaleFactory}');
+
     return Stack(
       children: <Widget>[
         Image.asset(
@@ -46,7 +66,7 @@ class _SplashWidgetState extends State<SplashWidget> {
           fit: BoxFit.fitHeight,
         ),
         Positioned(
-          top: 20.0,
+          top: ScreenUtil().setSp(20),
           right: 0,
           child: GestureDetector(
             onTap: _toHome,
@@ -54,17 +74,17 @@ class _SplashWidgetState extends State<SplashWidget> {
               child: Text(
                 '跳过',
                 style: TextStyle(
-                    fontSize: 16, decorationStyle: TextDecorationStyle.dashed),
+                    fontSize: ScreenUtil().setSp(32), decorationStyle: TextDecorationStyle.dashed),
               ),
               alignment: Alignment(0, 0),
               margin: EdgeInsets.all(30.0),
-              width: 50.0,
-              height: 50.0,
+              width: ScreenUtil().setHeight(88),
+              height: ScreenUtil().setHeight(88),
               decoration: BoxDecoration(
                 color: Colors.greenAccent,
                 border: Border.all(
                   color: Colors.orangeAccent,
-                  width: 1.0,
+                  width: ScreenUtil().setHeight(1),
                   style: BorderStyle.solid,
                 ),
                 shape: BoxShape.circle,

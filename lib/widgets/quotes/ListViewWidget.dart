@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../models/exchange.dart';
+import 'package:demo1/models/exchange.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListViewWidget extends StatefulWidget {
   @override
@@ -18,20 +19,20 @@ class ListViewWidgetState extends State<ListViewWidget>
       color: Colors.white,
       padding: EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
       margin: EdgeInsets.all(1.0),
-      height: 66,
+      height: ScreenUtil().setHeight(108),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Image.network(
             lists[index].imgUrl,
-            height: 36.0,
-            width: 36.0,
+            height: ScreenUtil().setHeight(64),
+            width: ScreenUtil().setWidth(64),
           ),
           // SizedBox(height: 10.0),
           Container(
             padding: EdgeInsets.fromLTRB(6.0, 1.0, 1.0, 1.0),
             alignment: Alignment.centerLeft,
-            width: 115,
+            width: ScreenUtil().setWidth(225),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +55,7 @@ class ListViewWidgetState extends State<ListViewWidget>
             ),
           ),
           Container(
-            width: 113,
+            width: ScreenUtil().setWidth(220),
             alignment: Alignment.centerLeft,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
